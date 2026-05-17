@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomas Paine en dialogue avec les penseurs politiques</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .chart-container {
+            min-height: 250px;
+            max-height: 400px;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        .thinker-card {
+            transition: all 0.3s ease;
+        }
+        .thinker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .tradition-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .tradition-card.active {
+            border-left: 5px solid #3b82f6;
+            background-color: #eff6ff;
+        }
+        .connection-line {
+            stroke: #94a3b8;
+            stroke-width: 2;
+            fill: none;
+        }
+        .connection-line.agreement {
+            stroke: #10b981;
+        }
+        .connection-line.disagreement {
+            stroke: #ef4444;
+        }
+        .connection-line.partial {
+            stroke: #f59e0b;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Thomas Paine en dialogue avec les penseurs politiques</h1>
+            <p class="text-xl text-gray-600 italic">"Comment Thomas Paine, l'auteur de 'Common Sense', a-t-il dialogué avec les grands penseurs politiques qui l'ont précédé pour façonner une vision révolutionnaire de la démocratie?"</p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Section 1: Paine's Core Principles -->
+            <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-book mr-2 text-blue-600"></i> Common Sense (1776) - Principes fondamentaux
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">Égalité originelle des hommes</h3>
+                        <p class="text-gray-700">Pour Paine, tous les hommes naissent égaux et possèdent les mêmes droits naturels.</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-green-800 mb-2">Société ≠ Gouvernement</h3>
+                        <p class="text-gray-700">La société est un bien, le gouvernement est un mal nécessaire qui doit être limité.</p>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-purple-800 mb-2">La loi est le seul roi</h3>
+                        <p class="text-gray-700">La souveraineté appartient à la loi, non aux hommes ou aux institutions héréditaires.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Interactive Dialogue Map -->
+            <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-project-diagram mr-2 text-green-600"></i> Carte interactive du dialogue philosophique
+                </h2>
+                <div class="flex flex-col lg:flex-row gap-6">
+                    <!-- Thinkers Navigation -->
+                    <div class="lg:w-1/3">
+                        <h3 class="font-bold text-lg text-gray-700 mb-3">Sélectionnez un penseur:</h3>
+                        <div class="space-y-3" id="thinkersList">
+                            <div class="thinker-card bg-gray-100 p-4 rounded-lg cursor-pointer" data-thinker="hobbes">
+                                <h4 class="font-bold">Thomas Hobbes</h4>
+                                <p class="text-sm text-gray-600">Le gouvernement est nécessaire pour sortir de l'état de nature</p>
+                            </div>
+                            <div class="thinker-card bg-gray-100 p-4 rounded-lg cursor-pointer" data-thinker="locke">
+                                <h4 class="font-bold">John Locke</h4>
+                                <p class="text-sm text-gray-600">Les hommes sont naturellement libres et égaux</p>
+                            </div>
+                            <div class="thinker-card bg-gray-100 p-4 rounded-lg cursor-pointer" data-thinker="rousseau">
+                                <h4 class="font-bold">Jean-Jacques Rousseau</h4>
+                                <p class="text-sm text-gray-600">La société corrompt l'homme naturel</p>
+                            </div>
+                            <div class="thinker-card bg-gray-100 p-4 rounded-lg cursor-pointer" data-thinker="montesquieu">
+                                <h4 class="font-bold">Montesquieu</h4>
+                                <p class="text-sm text-gray-600">La liberté politique vient de l'équilibre des pouvoirs</p>
+                            </div>
+                            <div class="thinker-card bg-gray-100 p-4 rounded-lg cursor-pointer" data-thinker="machiavel">
+                                <h4 class="font-bold">Nicolas Machiavel</h4>
+                                <p class="text-sm text-gray-600">La république doit être gouvernée par les lois</p>
+                            </div>
+                            <div class="thinker-card bg-gray-100 p-4 rounded-lg cursor-pointer" data-thinker="burke">
+                                <h4 class="font-bold">Edmund Burke</h4>
+                                <p class="text-sm text-gray-600">La constitution est un héritage historique</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dialogue Details -->
+                    <div class="lg:w-2/3">
+                        <div id="dialogueDetails" class="bg-gray-50 p-6 rounded-lg min-h-[300px]">
+                            <div class="text-center text-gray-500">
+                                <i class="fas fa-hand-pointer text-4xl mb-3"></i>
+                                <p>Sélectionnez un penseur pour explorer son dialogue avec Paine</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Three Traditions -->
+            <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-sitemap mr-2 text-purple-600"></i> Les trois traditions de la pensée politique
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+                    <div class="tradition-card bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500" data-tradition="contractualist">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">Tradition contractualiste</h3>
+                        <p class="text-sm text-gray-700">Hobbes – Locke – Rousseau</p>
+                    </div>
+                    <div class="tradition-card bg-green-50 p-4 rounded-lg border-l-4 border-green-500" data-tradition="republican">
+                        <h3 class="font-bold text-lg text-green-800 mb-2">Tradition républicaine</h3>
+                        <p class="text-sm text-gray-700">Machiavel – Montesquieu</p>
+                    </div>
+                    <div class="tradition-card bg-red-50 p-4 rounded-lg border-l-4 border-red-500" data-tradition="historicist">
+                        <h3 class="font-bold text-lg text-red-800 mb-2">Tradition historiciste</h3>
+                        <p class="text-sm text-gray-700">Burke</p>
+                    </div>
+                </div>
+
+                <div id="traditionContent" class="bg-gray-50 p-6 rounded-lg">
+                    <div class="text-center text-gray-500">
+                        <i class="fas fa-hand-pointer text-4xl mb-3"></i>
+                        <p>Sélectionnez une tradition pour explorer l'influence sur la pensée de Paine</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Agreement Chart -->
+            <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-chart-radar mr-2 text-indigo-600"></i> Analyse des points d'accord et de désaccord
+                </h2>
+                <div class="chart-container">
+                    <canvas id="agreementChart"></canvas>
+                </div>
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
+                        <span>Accord fort</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
+                        <span>Accord partiel</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
+                        <span>Désaccord</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Synthesis -->
+            <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-lightbulb mr-2 text-yellow-500"></i> Synthèse: L'originalité de la pensée de Paine
+                </h2>
+                <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                    <p class="text-gray-700 mb-4">La pensée de Paine se situe à l'intersection de trois grandes traditions de la philosophie politique. Il ne se contente pas de reprendre les idées de ses prédécesseurs, mais les transforme pour créer une vision révolutionnaire de la démocratie.</p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li><strong>Tradition contractualiste:</strong> Paine adopte l'égalité naturelle de Locke mais rejette le souverain de Hobbes et transforme l'idée rousseauiste de souveraineté populaire en programme constitutionnel concret.</li>
+                        <li><strong>Tradition républicaine:</strong> Il reprend l'idée que la loi doit gouverner, mais rejette l'équilibre aristocratique de Montesquieu au profit d'un gouvernement simple et démocratique.</li>
+                        <li><strong>Tradition historiciste:</strong> Ici le conflit est total: Burke fonde la légitimité sur l'histoire et la tradition, tandis que Paine la fonde sur la raison et l'égalité.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-600 text-sm mt-12 pt-6 border-t border-gray-200">
+            <p>Explorable Explanation: Thomas Paine en dialogue avec les penseurs politiques</p>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize variables
+        let agreementChart = null;
+        let selectedThinker = null;
+        let selectedTradition = null;
+
+        // Thinkers data
+        const thinkersData = {
+            hobbes: {
+                name: "Thomas Hobbes",
+                relation: "Désaccord fondamental",
+                description: "Pour Hobbes, le gouvernement est nécessaire pour sortir de l'état de nature et de la guerre de tous contre tous.",
+                painePosition: "Paine rejette l'idée que l'ordre politique doive être fondé sur la peur.",
+                keyConcepts: ["État de nature", "Souverain", "Contrat social", "Sécurité"],
+                agreementLevel: 20
+            },
+            locke: {
+                name: "John Locke",
+                relation: "Proximité conceptuelle",
+                description: "Locke affirme que les hommes sont naturellement libres et égaux.",
+                painePosition: "Paine reprend cette idée d'égalité naturelle mais la radicalise en proposant l'abolition de la monarchie.",
+                keyConcepts: ["Liberté naturelle", "Droits naturels", "Propriété", "Consentement"],
+                agreementLevel: 80
+            },
+            rousseau: {
+                name: "Jean-Jacques Rousseau",
+                relation: "Désaccord partiel",
+                description: "Rousseau considère que la société corrompt l'homme naturel.",
+                painePosition: "Pour Paine, la société est un bien, seul le gouvernement est un mal nécessaire.",
+                keyConcepts: ["Homme naturel", "Société", "Volonté générale", "Corruption"],
+                agreementLevel: 50
+            },
+            montesquieu: {
+                name: "Montesquieu",
+                relation: "Désaccord",
+                description: "Montesquieu pense que la liberté politique vient de l'équilibre des pouvoirs.",
+                painePosition: "Paine considère que la constitution anglaise est trop complexe et que la simplicité rend le pouvoir responsable.",
+                keyConcepts: ["Séparation des pouvoirs", "Liberté politique", "Équilibre", "Modération"],
+                agreementLevel: 30
+            },
+            machiavel: {
+                name: "Nicolas Machiavel",
+                relation: "Proximité conceptuelle",
+                description: "Machiavel affirme que la république doit être gouvernée par les lois et non par les hommes.",
+                painePosition: "Paine reprend l'idée républicaine de la souveraineté de la loi.",
+                keyConcepts: ["Loi", "République", "Vertu", "Souveraineté"],
+                agreementLevel: 75
+            },
+            burke: {
+                name: "Edmund Burke",
+                relation: "Opposition frontale",
+                description: "Burke considère la constitution comme un héritage historique et la société comme un partenariat entre les morts, les vivants et les non-nés.",
+                painePosition: "Paine affirme que la constitution doit être créée délibérément par les vivants et que la monarchie anglaise n'est qu'une usurpation historique.",
+                keyConcepts: ["Tradition", "Histoire", "Héritage", "Réforme"],
+                agreementLevel: 10
+            }
+        };
+
+        // Traditions data
+        const traditionsData = {
+            contractualist: {
+                title: "Tradition contractualiste",
+                thinkers: ["Hobbes", "Locke", "Rousseau"],
+                description: "La tradition contractualiste s'intéresse à la légitimité du pouvoir politique à travers l'idée d'un contrat social entre les individus.",
+                paineRelation: "Paine adopte l'égalité naturelle de Locke mais rejette le souverain de Hobbes et transforme l'idée rousseauiste de souveraineté populaire en programme constitutionnel concret.",
+                keyInnovations: [
+                    "Transformation de l'égalité naturelle en principe politique concret",
+                    "Rejet de toute forme d'autorité héréditaire",
+                    "Application du contrat social à la réalité constitutionnelle"
+                ]
+            },
+            republican: {
+                title: "Tradition républicaine",
+                thinkers: ["Machiavel", "Montesquieu"],
+                description: "La tradition républicaine met l'accent sur la vertu civique, la loi comme garant de la liberté, et l'équilibre des pouvoirs.",
+                paineRelation: "Il reprend l'idée que la loi doit gouverner, mais rejette l'équilibre aristocratique de Montesquieu au profit d'un gouvernement simple et démocratique.",
+                keyInnovations: [
+                    "Simplification du système constitutionnel pour plus de responsabilité",
+                    "Primauté absolue de la loi sur les hommes",
+                    "Démocratisation des principes républicains"
+                ]
+            },
+            historicist: {
+                title: "Tradition historiciste",
+                thinkers: ["Burke"],
+                description: "La tradition historiciste fonde la légitimité politique sur l'histoire, la tradition et l'évolution progressive des institutions.",
+                paineRelation: "Ici le conflit est total: Burke fonde la légitimité sur l'histoire et la tradition. Paine fonde la légitimité sur la raison et l'égalité.",
+                keyInnovations: [
+                    "Fondation de la légitimité sur la raison plutôt que sur la tradition",
+                    "Droit des générations présentes à créer leur propre constitution",
+                    "Critique radicale de l'hérédité et de la monarchie"
+                ]
+            }
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                console.log("Initializing Paine Philosophy Explorable Explanation");
+                
+                // Set up thinkers click handlers
+                const thinkerCards = document.querySelectorAll('.thinker-card');
+                thinkerCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        const thinker = this.getAttribute('data-thinker');
+                        if (thinker && typeof thinker === 'string') {
+                            showThinkerDetails(thinker);
+                        }
+                    });
+                });
+
+                // Set up traditions click handlers
+                const traditionCards = document.querySelectorAll('.tradition-card');
+                traditionCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        const tradition = this.getAttribute('data-tradition');
+                        if (tradition && typeof tradition === 'string') {
+                            showTraditionDetails(tradition);
+                            
+                            // Update active state
+                            traditionCards.forEach(c => c.classList.remove('active'));
+                            this.classList.add('active');
+                        }
+                    });
+                });
+
+                // Initialize agreement chart
+                initAgreementChart();
+                
+                console.log("Initialization completed successfully");
+            } catch (error) {
+                console.error("Error during initialization:", error);
+            }
+        });
+
+        // Show thinker details
+        function showThinkerDetails(thinker) {
+            try {
+                if (!thinker || typeof thinker !== 'string') {
+                    console.error("Invalid thinker parameter:", thinker);
+                    return;
+                }
+
+                selectedThinker = thinker;
+                const data = thinkersData[thinker];
+                
+                if (!data) {
+                    console.error("No data found for thinker:", thinker);
+                    return;
+                }
+
+                const detailsContainer = document.getElementById('dialogueDetails');
+                if (!detailsContainer) {
+                    console.error("Dialogue details container not found");
+                    return;
+                }
+
+                // Update the container content
+                detailsContainer.innerHTML = `
+                    <div class="mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">${data.name}</h3>
+                        <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full ${getRelationColorClass(data.relation)}">${data.relation}</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-700 mb-2">Position de ${data.name}:</h4>
+                            <p class="text-gray-600">${data.description}</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700 mb-2">Position de Paine:</h4>
+                            <p class="text-gray-600">${data.painePosition}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-700 mb-2">Concepts clés:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${data.keyConcepts.map(concept => 
+                                `<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">${concept}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: ${data.agreementLevel}%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>Désaccord</span>
+                            <span>Niveau d'accord: ${data.agreementLevel}%</span>
+                            <span>Accord</span>
+                        </div>
+                    </div>
+                `;
+
+                // Update the chart to highlight this thinker
+                updateAgreementChart(thinker);
+                
+                console.log(`Displayed details for thinker: ${thinker}`);
+            } catch (error) {
+                console.error("Error showing thinker details:", error);
+            }
+        }
+
+        // Show tradition details
+        function showTraditionDetails(tradition) {
+            try {
+                if (!tradition || typeof tradition !== 'string') {
+                    console.error("Invalid tradition parameter:", tradition);
+                    return;
+                }
+
+                selectedTradition = tradition;
+                const data = traditionsData[tradition];
+                
+                if (!data) {
+                    console.error("No data found for tradition:", tradition);
+                    return;
+                }
+
+                const contentContainer = document.getElementById('traditionContent');
+                if (!contentContainer) {
+                    console.error("Tradition content container not found");
+                    return;
+                }
+
+                // Update the container content
+                contentContainer.innerHTML = `
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">${data.title}</h3>
+                    <p class="text-gray-600 mb-4">${data.description}</p>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-gray-700 mb-2">Penseurs représentatifs:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${data.thinkers.map(thinker => 
+                                `<span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">${thinker}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-gray-700 mb-2">Relation avec Paine:</h4>
+                        <p class="text-gray-600">${data.paineRelation}</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold text-gray-700 mb-2">Innovations de Paine:</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                            ${data.keyInnovations.map(innovation => 
+                                `<li>${innovation}</li>`
+                            ).join('')}
+                        </ul>
+                    </div>
+                `;
+
+                console.log(`Displayed details for tradition: ${tradition}`);
+            } catch (error) {
+                console.error("Error showing tradition details:", error);
+            }
+        }
+
+        // Initialize agreement chart
+        function initAgreementChart() {
+            try {
+                const ctx = document.getElementById('agreementChart');
+                if (!ctx) {
+                    console.error("Agreement chart canvas not found");
+                    return;
+                }
+
+                const chartCtx = ctx.getContext('2d');
+                if (!chartCtx) {
+                    console.error("Could not get chart context");
+                    return;
+                }
+
+                // Prepare data
+                const thinkers = Object.keys(thinkersData);
+                const agreementLevels = thinkers.map(thinker => thinkersData[thinker].agreementLevel);
+                
+                // Create the chart
+                agreementChart = new Chart(chartCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: thinkers.map(thinker => thinkersData[thinker].name),
+                        datasets: [{
+                            label: 'Niveau d\'accord avec Paine',
+                            data: agreementLevels,
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: agreementLevels.map(level => {
+                                if (level >= 70) return 'rgba(16, 185, 129, 1)'; // Green for high agreement
+                                if (level >= 40) return 'rgba(245, 158, 11, 1)'; // Yellow for medium agreement
+                                return 'rgba(239, 68, 68, 1)'; // Red for low agreement
+                            }),
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    display: true
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                                ticks: {
+                                    stepSize: 20
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                console.log("Agreement chart initialized successfully");
+            } catch (error) {
+                console.error("Error initializing agreement chart:", error);
+            }
+        }
+
+        // Update agreement chart to highlight selected thinker
+        function updateAgreementChart(selectedThinker) {
+            try {
+                if (!agreementChart || !selectedThinker) {
+                    console.error("Chart not initialized or no thinker selected");
+                    return;
+                }
+
+                const thinkers = Object.keys(thinkersData);
+                const selectedIndex = thinkers.indexOf(selectedThinker);
+                
+                if (selectedIndex === -1) {
+                    console.error("Selected thinker not found in data");
+                    return;
+                }
+
+                // Create new dataset array with the selected thinker highlighted
+                const newDatasets = [{
+                    ...agreementChart.data.datasets[0],
+                    pointBackgroundColor: thinkers.map((thinker, index) => {
+                        const level = thinkersData[thinker].agreementLevel;
+                        if (index === selectedIndex) {
+                            return 'rgba(99, 102, 241, 1)'; // Highlight selected thinker in indigo
+                        }
+                        if (level >= 70) return 'rgba(16, 185, 129, 1)'; // Green for high agreement
+                        if (level >= 40) return 'rgba(245, 158, 11, 1)'; // Yellow for medium agreement
+                        return 'rgba(239, 68, 68, 1)'; // Red for low agreement
+                    }),
+                    pointRadius: thinkers.map((thinker, index) => {
+                        return index === selectedIndex ? 6 : 3; // Larger point for selected thinker
+                    })
+                }];
+
+                // Update chart data
+                agreementChart.data.datasets = newDatasets;
+                agreementChart.update();
+                
+                console.log(`Agreement chart updated to highlight: ${selectedThinker}`);
+            } catch (error) {
+                console.error("Error updating agreement chart:", error);
+            }
+        }
+
+        // Helper function to get color class based on relation type
+        function getRelationColorClass(relation) {
+            if (!relation || typeof relation !== 'string') {
+                console.error("Invalid relation parameter");
+                return 'bg-gray-100 text-gray-800';
+            }
+
+            if (relation.includes('Opposition') || relation.includes('Désaccord fondamental')) {
+                return 'bg-red-100 text-red-800';
+            }
+            if (relation.includes('Proximité') || relation.includes('Accord')) {
+                return 'bg-green-100 text-green-800';
+            }
+            if (relation.includes('partiel')) {
+                return 'bg-yellow-100 text-yellow-800';
+            }
+            return 'bg-blue-100 text-blue-800';
+        }
+    </script>
+<script>window.parent.postMessage({ action: "ready" }, "*"); 
+ 
+window.console = new Proxy(console, {
+  get(target, prop) {
+    if (['log', 'warn', 'error'].includes(prop)) {
+      return new Proxy(target[prop], {
+        apply(fn, thisArg, args) {
+          fn.apply(thisArg, args);
+          window.parent.postMessage({ action: 'console', 
+            type: prop, 
+            args: args.map((arg) => {
+              try {
+                return JSON.stringify(arg).replace(/^["']|["']$/g, '');
+              } catch (e) {
+                return arg;
+              }
+            }) 
+          }, '*');
+        }
+      });
+    }
+    return target[prop];
+  }
+});
+</script></body>
+</html>
